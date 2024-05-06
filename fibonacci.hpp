@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstddef>
+#include <cstdint>
 #include <set>
 #include <vector>
 
@@ -42,6 +43,7 @@ public:
             return true;
          return _comparator(_vertices[v].element, _vertices[w].element);
       });
+      assert(min_idx != -1);
       for (auto& r : _roots) {
          if (r == min_idx) {
             r = -1;
@@ -90,6 +92,7 @@ private:
             add_edge(v, r);
             plant(r);
          } else {
+            assert(_comparator(_vertices[v].element, _vertices[r].element));
             // _roots[_vertices[v].children.size()] = -1;
             add_edge(r, v);
             plant(v);
@@ -125,7 +128,7 @@ private:
       _vertices[v].parent = v;
    }
 
-   std::size_t _num_removed;
+   uint32_t _num_removed;
    std::vector<VertexIdx> _roots;
    std::vector<Vertex> _vertices;
    const Compare _comparator;

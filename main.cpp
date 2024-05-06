@@ -2,6 +2,7 @@
 #include <bitset>
 #include <cassert>
 #include <cstdint>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <limits>
@@ -11,7 +12,9 @@
 
 #include "fibonacci.hpp"
 
+#ifndef MAX_NUM_TERM
 #define MAX_NUM_TERM 20
+#endif
 
 using cost = uint32_t;
 struct Point {
@@ -45,7 +48,7 @@ class DijktraSteiner {
             return _z < other._z;
          if (_x == other._x)
             return _y < other._y;
-         return _x < other._y;
+         return _x < other._x;
       }
       PointRep
       operator+(const PointRep& other) {
